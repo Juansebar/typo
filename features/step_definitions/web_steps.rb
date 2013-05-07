@@ -31,6 +31,12 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+Given /^the following exists/ do |contents|
+	contents.hashes.each do |value|
+		Article.create!(value)
+	end
+end
+
 Given /^the blog is set up$/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});

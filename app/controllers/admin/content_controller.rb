@@ -6,6 +6,16 @@ class Admin::ContentController < Admin::BaseController
 
   cache_sweeper :blog_sweeper
 
+	def merge
+		if Article.merge(params[:id], params[:merge_with])
+			flash[:notice] = "Your Articles were successfully merged."
+			redirect_to :admin_content
+		#else
+		#	flash[:notice] = _("Your Articles were NOT merged.")
+		#	redirect_to "admin/content/edit/#{params[:id]}"
+		end
+	end
+
   def auto_complete_for_article_keywords
     @items = Tag.find_with_char params[:article][:keywords].strip
     render :inline => "<%= raw auto_complete_result @items, 'name' %>"

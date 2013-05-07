@@ -95,6 +95,21 @@ class Article < Content
   include Article::States
 
   class << self
+    
+    def merge(first_article, second_article)
+    	debugger
+    	if Article.exists?(second_article)
+    		first_article = Article.find_by_id(first_article)
+    		first_article = Article.find(first_article.id)
+    		second_article = Article.find(second_article)
+    	else
+    		return false
+    	end
+    	
+    	merged_body = first_article.body + second_article.body
+    	merged_articles = Article.create(:title => first_article.title, :body => merged_body, :author => first_article.author, :published => true, :id => first_article.id)
+    end
+    
     def last_draft(article_id)
       article = Article.find(article_id)
       while article.has_child?

@@ -10,9 +10,9 @@ class Admin::ContentController < Admin::BaseController
 		if Article.merge(params[:id], params[:merge_with])
 			flash[:notice] = "Your Articles were successfully merged."
 			redirect_to :admin_content
-		#else
-		#	flash[:notice] = _("Your Articles were NOT merged.")
-		#	redirect_to "admin/content/edit/#{params[:id]}"
+		else
+			flash[:notice] = "Your Articles were NOT merged."
+			redirect_to "admin/content/edit/#{params[:id]}"
 		end
 	end
 

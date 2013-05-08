@@ -19,4 +19,24 @@ Feature: Article Merging
 		And I fill in "merge_with" with "4"
 		And I press "Merge"
 		Then I should see "Your Articles were successfully merged."
+	
+	Scenario: Non-admin cannot merge articles
+		Given I am on the new user page
+		And I fill in "user_login" with "Daniel"
+		And I fill in "user_password" with "daniel123"
+		And I fill in "user_password_confirmation" with "daniel123"
+		And I fill in "user_email" with "daniel@email.com"
+		And I select "Blog publisher" from "user_profile_id"
+		And I fill in "user_firstname" with "Daniel"
+		And I fill in "user_lastname" with "Oso"
+		Then I press "Save"
+		And I follow "Log out"
+		And I fill in "user_login" with "Daniel"
+		And I fill in "user_password" with "daniel123"
+		And I press "Login"
+		Then I should see "All Articles"
+		Then I follow "All Articles"
+		And I follow "Hello Moon"
+		Then I should not see "Merge Articles"
+		
 		

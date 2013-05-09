@@ -111,6 +111,27 @@ class Article < Content
     	
     	debugger
     	merged_articles = Article.create(:title => first_article.title, :body => merged_body, :author => first_article.author, :published => true, :id => first_article.id, :user_id => first_article.user_id, :published => true, :allow_comments => true)
+    	
+    	debugger
+    	
+    	#ADD comments to the file
+    	first_article_comments = Feedback.find_all_by_article_id(first_article.id)
+    	second_article_comments = Feedback.find_all_by_article_id(second_article.id)
+    	
+    	unless first_article_comments.blank?
+    		first_article_comments.each do |comment|
+    			comment.article_id = merged_articles.id
+    			comment.save
+    		end
+    	end
+    	
+    	unless second_article_comments.blank?		#Means .nil? and .empty?
+    		second_article_comments.each do |comment|
+    			comment.article_id = merged_articles.id
+    			comment.save
+    		end
+    	end
+    	
     	Article.destroy(first_article)
     	Article.destroy(second_article)
     end

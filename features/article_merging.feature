@@ -11,7 +11,7 @@ Feature: Article Merging
 		| Hello Mars  | Johnny | Mars Life | t         | 4  |
 		And I am logged into the admin panel
 
-	Scenario: Admin merges related articles, and it should have text from both articles and have only one author
+	Scenario: Admin merges related articles, and it should have text from both articles, one author, and one title
 		Given I am on the admin content page
 		Then I should see "Hello Moon"
 		Given I follow "Hello Moon"

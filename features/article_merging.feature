@@ -6,12 +6,12 @@ Feature: Article Merging
 	Background:
 		Given the blog is set up
 		Given the following exists:
-		| title       | author |     body      | published | id |
-		| Hello Moon  | Albert | Albert's Life | t         | 3  |
-		| Hello Mars  | Johnny | Johnny's Life | t         | 4  |
+		| title       | author |   body    | published | id |
+		| Hello Moon  | Albert | Moon Life | t         | 3  |
+		| Hello Mars  | Johnny | Mars Life | t         | 4  |
 		And I am logged into the admin panel
 
-	Scenario: Admin merges related articles
+	Scenario: Admin merges related articles, and it should have text from both articles and have only one author
 		Given I am on the admin content page
 		Then I should see "Hello Moon"
 		Given I follow "Hello Moon"
@@ -20,6 +20,9 @@ Feature: Article Merging
 		And I press "Merge"
 		Then I should see "Your Articles were successfully merged."
 		And I should not see "Hello Mars"
+		And I follow "Hello Moon"
+		Then I should see "Moon LifeMars Life"
+		And I should not see "Johnny"
 	
 	Scenario: Non-admin cannot merge articles
 		Given I am on the new user page

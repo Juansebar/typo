@@ -19,6 +19,7 @@ Feature: Article Merging
 		And I fill in "merge_with" with "4"
 		And I press "Merge"
 		Then I should see "Your Articles were successfully merged."
+		And I should not see "Hello Mars"
 	
 	Scenario: Non-admin cannot merge articles
 		Given I am on the new user page

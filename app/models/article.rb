@@ -99,16 +99,20 @@ class Article < Content
     def merge(first_article, second_article)
     	debugger
     	if Article.exists?(second_article)
-    		first_article = Article.find_all_by_id(first_article)
-    		#first_article = Article.find(first_article.id)
-    		second_article = Article.find(second_article)
-    		#return true
+    		first_article = Article.find_by_id(first_article)
+    		#first_article = first_array[0]
+    		second_article = Article.find_by_id(second_article)
+    		
+    		merged_body = first_article.body + second_article.body
     	else
     		return false
     	end
+    	#debugger
     	
-    	#merged_body = first_article[:body] + second_article.body
-    	#merged_articles = Article.create(:title => first_article.title, :body => merged_body, :author => first_article.author, :published => true, :id => first_article.id)
+    	debugger
+    	merged_articles = Article.create(:title => first_article.title, :body => merged_body, :author => first_article.author, :published => true, :id => first_article.id, :user_id => first_article.user_id, :published => true, :allow_comments => true)
+    	Article.destroy(first_article)
+    	Article.destroy(second_article)
     end
     
     def last_draft(article_id)

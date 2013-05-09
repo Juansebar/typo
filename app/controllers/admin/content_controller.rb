@@ -7,6 +7,7 @@ class Admin::ContentController < Admin::BaseController
   cache_sweeper :blog_sweeper
 
 	def merge
+		debugger
 		if Article.merge(params[:id], params[:merge_with])
 			flash[:notice] = "Your Articles were successfully merged."
 			redirect_to :admin_content
